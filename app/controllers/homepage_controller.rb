@@ -14,7 +14,8 @@ class HomepageController < ApplicationController
 
   def set_user
     # params[:uuid] = '072e69bc-c51a-11eb-8529-0242ac130003' if Rails.env.development?
+
     @user = User.where(fidmarques_uuid: params[:uuid]).first
-    sign_in @user if !user_signed_in? || @user.present?
+    sign_in @user, event: :authentication if !user_signed_in? || @user.present?
   end
 end
