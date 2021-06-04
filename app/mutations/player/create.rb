@@ -1,7 +1,6 @@
 class Player::Create < Mutations::Command
 
   required do
-    model :user
     model :game
     string :color
   end
@@ -11,7 +10,7 @@ class Player::Create < Mutations::Command
   end
 
   def create_a_player
-    @player = Player.create(user_id: user.id, game_id: game.id, color: color)
+    @player = Player.create(user_id: current_user.id, game_id: game.id, color: color)
     @player
   end
 

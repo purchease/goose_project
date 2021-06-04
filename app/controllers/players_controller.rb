@@ -3,7 +3,7 @@ class PlayersController < InheritedResources::Base
 
   def create
 
-    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], user_id: player_params[:user_id], color: player_params[:color])
+    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], color: player_params[:color])
 
 
       if player.success?
@@ -18,7 +18,7 @@ class PlayersController < InheritedResources::Base
   private
 
     def player_params
-      params.require(:player).permit(:color, :user_id, :game_id, :invitation_code)
+      params.require(:player).permit(:color, :game_id, :invitation_code)
     end
 
     def set_game

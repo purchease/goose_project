@@ -6,15 +6,10 @@ class Player::CreateFromInvitationRequest < Mutations::Command
 
   def validate
     validate_invitation
-    validate_user
   end
 
   def validate_invitation
     @invitation = GameInvitation.find_by_invitation_token(invitation_token: invitation_token)
-  end
-
-  def validate_user
-    @user = User.find_by_email(@invitation.email)
   end
 
   def execute
@@ -22,7 +17,7 @@ class Player::CreateFromInvitationRequest < Mutations::Command
   end
 
   def create_a_player
-    player = Player::Create.run(game: @invitation.game, user: @user)
+    player = Player::Create.run(game: @invitation.game)
     if player.success?
       update_game_invitation_to_used
       player.result
