@@ -1,25 +1,37 @@
-# README
+Goose Model
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+User(id, fidmarques_uuid, name, 
+Player(id, color, user_id,
 
-Things you may want to cover:
+Game(id, number_of_players, 
+PlayerSpacePosition(id, player_id, space_id
 
-* Ruby version
+GameCredit(id, game_id, is_used, 
 
-* System dependencies
+Space(id,game_space_skill_id, position, game_id
+SpaceSkill(id, rule
 
-* Configuration
+Gift(id, name
+GiftAttribution(id, player_id, 
 
-* Database creation
+Goose Rules
 
-* Database initialization
+Quand on est invité dans une partie on peut inscrire son prénom ( on devrait recevoir cette information depuis CORE )
 
-* How to run the test suite
+On démarre à 0
+On doit aller jusqu’à la case 62 pour avoir terminé la partie
 
-* Services (job queues, cache servers, search engines, etc.)
+Bouger un joueur -> 
 
-* Deployment instructions
+Si on arrive sur la même case qu’un autre joueur alors on le fait repartir à 0
+5 cases spéciales
 
-* ...
-# goose_hackathon_purchease
+Le dès ( Dice ) est une action ( mutation donc rien à faire )
+
+On obtient un crédit quand on scan un article 
+
+On peut compter le nombre de tour grâce aux GameCredit concernant une partie
+
+Mutations :
+
+DiceRoll
