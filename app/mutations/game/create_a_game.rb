@@ -4,12 +4,17 @@ class Game::CreateAGame < Mutations::Command
     model :user
   end
 
+  def validate
+    add_error(:user, :game, 'A game already exists') if Game.where(user_id: user.id).present?
+    return
+  end
+
   def execute
     create_a_game
   end
 
   def create_a_game
-    @game = Game.create(user_id: user.id)
+    @game = Game.create(user_id: user.id, invitation_code: SecureRandom.random_number(10000000))
     create_the_board
     @game
   end

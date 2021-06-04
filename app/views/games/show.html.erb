@@ -1,1 +1,40 @@
-I am the new game ;)
+<style>
+    .board {
+        height: 300px; /* Or whatever */
+    }
+</style>
+
+Tu veux inviter du monde à rejoindre la partie ? <br />
+
+Voici le code d'invitation : <%= @game.invitation_code %> <br />
+
+<% if @players.present? %>
+  Vos adversaires sont : <br />
+  <% @players.each do |player| %>
+    - <%= player.user.name %> <br />
+  <% end %>
+<% end %>
+
+<% if @player.id.nil? %>
+  <%= form_for @player, url: players_path(@player), method: :post do |form| %>
+
+    <div class="field">
+      <%= form.label 'Quelle couleur voulait vous jouer ?' %> <br />
+      <%= form.select :color, @game.color_available %><br />
+      <%= form.hidden_field :invitation_code, value: @game.invitation_code %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+    <% end %>
+
+<% end %>
+
+    <div class="d-flex flex-wrap bd-highlight mb-3 align-content-center">
+        <% @board.each do |space| %>
+        <div class="p-2 bd-highlight " style="">
+        <%= render partial: "games/space", locals: {space: space} %>
+        </div>
+        <% end %>
+      </div>

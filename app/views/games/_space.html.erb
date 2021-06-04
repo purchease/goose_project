@@ -1,0 +1,29 @@
+<style>
+    .square {
+        height: 100px;
+        width: 100px;
+        background-color: white;
+        border: thick double #f39c12;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .number_position {
+        flex-direction: column;
+        align-self: flex-start;
+    }
+    .logo_for_special_cases {
+        flex-direction: column;
+        align-self: flex-end
+    }
+</style>
+
+
+<div class="square">
+  <div class="number_position">
+    <%= space.position %>
+  </div>
+  <div class="logo_for_special_cases">
+    <i class="<%= display_icon(space.space_skill_id) %>"></i>
+  </div>
+</div>

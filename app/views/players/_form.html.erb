@@ -11,14 +11,18 @@
 <!--    </div>-->
   <%# end %>
   Enter the invitation code :
-
+  <% if params[:invitation_code] %>
   <div class="field">
     <%= form.label :invitation_code %>
     <%= form.text_field :invitation_code %>
   </div>
-
+  <% else %>
   <div class="field">
-    <%= form.label 'Quelle couleur voulait vous jouer ?' %>
+    <%= form.text_field :invitation_code, value: params[:invitation_code] %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= form.label 'Quelle couleur voulait vous jouer ?' %> <br />
     <%= form.select :color, ['VERT', 'ROUGE', 'BLEU', 'JAUNE']%>
   </div>
 

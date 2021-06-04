@@ -2,16 +2,19 @@ class PlayersController < InheritedResources::Base
   # before_action :set_game, only: [:create]
   before_action :authenticate_user!
 
+  def new
+  end
+
   def create
 
-    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], color: player_params[:color], user: current_user)
-
+    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], user: current_user, color: player_params[:color])
+    @game = Game.where(invitation_code: player_params[:invitation_code]).first
 
       if player.success?
-        @game = Game.where(id: player.result.game_id).first
         redirect_to @game
       else
-        render :new, notice: player.errors.message
+
+        redirect_to @game, notice: "Essayez encore ! "
       end
 
   end

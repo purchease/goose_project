@@ -3,13 +3,17 @@ class GamesController < ApplicationController
 
   before_action :set_game, only: [:show]
   def show
+    @player = Player.where(user: current_user, game: @game).first_or_initialize
+    @board = @game.spaces.order(position: :asc)
+    @players = @game.players
   end
 
   def create
     @game = Game::CreateAGame.run(user: current_user)
+    game_current_user = Game.where(user_id: current_user.id).last
 
-    if @game.success?
-      redirect_to @game.result
+    if game_current_user.present?
+      redirect_to game_current_user
     else
       redirect_to root_path
     end

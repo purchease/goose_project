@@ -1,2 +1,5 @@
-<%= link_to "Create a games",  games_path, method: :post, class: "btn btn-primary" %>
-<%= link_to "Join a games",  new_player_path, class: "btn btn-warning" %>
+Bonjour <%= current_user.name %>, <br />
+Bienvenue dans notre jeu de l'Oie, vous vous apprêtez à jouer au meilleur jeu au monde !  <br />
+
+<%= link_to "Créer une partie",  games_path, method: :post, class: "btn btn-primary mb-3" %> <br />
+<%= link_to "Rejoindre une partie",  new_player_path, class: "btn btn-warning" %>
