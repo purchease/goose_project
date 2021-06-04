@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :players
 
   namespace :api do
-    get 'events', to: 'events#receive_events'
+    post 'events', to: 'events#receive_events'
   end
 
   post 'rolls', to: 'dices#rolls'
