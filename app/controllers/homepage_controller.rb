@@ -6,7 +6,7 @@ class HomepageController < ApplicationController
   def index
     # @user = User.first
     # Create a games or Join a games with a code
-    redirect_to @user.current_game if user_signed_in? && @user.players.present?
+    redirect_to @user.current_game if user_signed_in? && @user.present? && @user.players.present?
   end
 
 
