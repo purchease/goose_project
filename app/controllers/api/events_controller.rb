@@ -26,7 +26,7 @@ class Api::EventsController < ApplicationController
       if params[:points_earned].positive?
         create_credit = Game::CreateCredit.run(fidmarques_uuid: params[:user_id])
         if create_credit.success?
-          render json: { message: "http://goose-fidmarques.herokuapp.com/#{user.fidmarques_uuid}", status: 200}
+          render json: { message: "http://goose-fidmarques.herokuapp.com?uuid=#{user.fidmarques_uuid}", status: 200}
         else
           render json: { message: "Credit could not be credited", status: 403 }
         end
