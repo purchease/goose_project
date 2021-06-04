@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   namespace :api do
     get 'events', to: 'events#receive_events'
   end
+
+  post 'rolls', to: 'dices#rolls'
 end

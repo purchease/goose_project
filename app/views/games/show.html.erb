@@ -31,6 +31,11 @@ Voici le code d'invitation : <%= @game.invitation_code %> <br />
 
 <% end %>
 
+<% if @credits.present? %>
+  <%= link_to "Roll the dices BRO !", rolls_path(credit: @credits.first, game: @game, player: @player ), method: :post %>
+<% end  %>
+
+
     <div class="d-flex flex-wrap bd-highlight mb-3 align-content-center">
         <% @board.each do |space| %>
         <div class="p-2 bd-highlight " style="">

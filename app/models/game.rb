@@ -6,6 +6,8 @@ class Game < ApplicationRecord
 
   has_many :players
   has_many :spaces
+  has_many :game_credits
+
 
   def color_available
     AVAILABLE_COLORS - players.pluck(:color)

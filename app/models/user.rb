@@ -11,4 +11,8 @@ class User < ApplicationRecord
     all_games.last == Game::FINISHED
     players.last.game
   end
+
+  def current_player
+    players.last
+  end
 end

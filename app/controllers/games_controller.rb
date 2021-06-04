@@ -6,6 +6,7 @@ class GamesController < ApplicationController
     @player = Player.where(user: current_user, game: @game).first_or_initialize
     @board = @game.spaces.order(position: :asc)
     @players = @game.players
+    @credits = GameCredit.where(game:@game, player_id: current_user.current_player, is_used: false)
   end
 
   def create
