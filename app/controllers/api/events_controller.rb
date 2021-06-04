@@ -10,7 +10,7 @@ class Api::EventsController < ApplicationController
       user = User.where(
         fidmarques_uuid: params[:user_id],
         email: params[:user][:email],
-        name: params[:user][:name]
+        name: params[:user][:first_name]
       ).first_or_create do |user|
         user.password = SecureRandom.hex(10)
       end
