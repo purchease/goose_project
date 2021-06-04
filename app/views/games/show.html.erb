@@ -7,7 +7,9 @@
 Tu veux inviter du monde à rejoindre la partie ? <br />
 
 Voici le code d'invitation : <%= @game.invitation_code %> <br />
-
+<% if user_signed_in? %>
+<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+<% end %>
 <% if @players.present? %>
   Vos adversaires sont : <br />
   <% @players.each do |player| %>
