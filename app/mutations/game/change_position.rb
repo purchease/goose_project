@@ -1,4 +1,4 @@
-class Dice::Roll < Mutations::Command
+class Game::ChangePosition < Mutations::Command
 
   optional do
     integer :days_ago

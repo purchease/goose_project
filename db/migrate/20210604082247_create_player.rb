@@ -3,6 +3,7 @@ class CreatePlayer < ActiveRecord::Migration[6.0]
     create_table :players do |t|
       t.string :color
       t.references :user, null: false, foreign_key: true
+      t.references :game, null: false, foreign_key: true
     end
   end
 end
