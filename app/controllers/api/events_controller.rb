@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class Api::EventsController < ApplicationController
   before_action :authenticate_user!
 
   def receive_events
