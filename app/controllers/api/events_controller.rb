@@ -1,4 +1,5 @@
 class Api::EventsController < ApplicationController
+  skip_before_action :authenticate_user!
 
   def receive_events
 
