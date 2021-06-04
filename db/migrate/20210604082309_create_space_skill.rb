@@ -3,6 +3,8 @@ class CreateSpaceSkill < ActiveRecord::Migration[6.0]
     create_table :space_skills do |t|
       t.string :name
       t.text :rule
+      t.timestamps
+
     end
   end
 end

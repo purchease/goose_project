@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_085254) do
+ActiveRecord::Schema.define(version: 2021_06_04_122011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,26 +19,37 @@ ActiveRecord::Schema.define(version: 2021_06_04_085254) do
     t.bigint "game_id", null: false
     t.bigint "player_id", null: false
     t.boolean "is_used"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_game_credits_on_game_id"
     t.index ["player_id"], name: "index_game_credits_on_player_id"
   end
 
   create_table "games", force: :cascade do |t|
     t.integer "number_of_players"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "invitation_code"
   end
 
   create_table "gift_attributions", force: :cascade do |t|
     t.bigint "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_gift_attributions_on_player_id"
   end
 
   create_table "gifts", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "player_space_positions", force: :cascade do |t|
     t.bigint "space_id", null: false
     t.bigint "player_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["player_id"], name: "index_player_space_positions_on_player_id"
     t.index ["space_id"], name: "index_player_space_positions_on_space_id"
   end
@@ -47,6 +58,8 @@ ActiveRecord::Schema.define(version: 2021_06_04_085254) do
     t.string "color"
     t.bigint "user_id", null: false
     t.bigint "game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_players_on_game_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
@@ -54,12 +67,16 @@ ActiveRecord::Schema.define(version: 2021_06_04_085254) do
   create_table "space_skills", force: :cascade do |t|
     t.string "name"
     t.text "rule"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "spaces", force: :cascade do |t|
     t.bigint "space_skill_id", null: false
     t.integer "position"
     t.bigint "game_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_spaces_on_game_id"
     t.index ["space_skill_id"], name: "index_spaces_on_space_skill_id"
   end
