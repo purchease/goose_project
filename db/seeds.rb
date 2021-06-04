@@ -15,4 +15,6 @@ SpaceSkill.create(id: 2, name: "TWO_TIMES", rule: "Multiple by 2 the total dice.
 SpaceSkill.create(id: 3, name: "HOLE", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
 SpaceSkill.create(id: 4, name: "HOLE", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
 
+Game.create(number_of_players: 3, invitation_code: "BOUBOU")
+
 

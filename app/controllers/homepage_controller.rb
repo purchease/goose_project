@@ -2,7 +2,7 @@ class HomepageController < ApplicationController
 
   def index
     @user = User.first
-    # Create a game or Join a game with a code
+    # Create a games or Join a games with a code
   end
 
 

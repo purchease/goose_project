@@ -22,7 +22,17 @@ class Player::CreateFromInvitationRequest < Mutations::Command
   end
 
   def create_a_player
-    Player::Create.run!(game: @invitation.game, user: @user)
+    player = Player::Create.run(game: @invitation.game, user: @user)
+    if player.success?
+      update_game_invitation_to_used
+      player.result
+    else
+      player.errors
+    end
+  end
+
+  def update_game_invitation_to_used
+    @invitation.update(is_used: true)
   end
 
 

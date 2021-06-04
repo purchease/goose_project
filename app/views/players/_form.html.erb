@@ -1,0 +1,32 @@
+<%= form_with(model: player, local: true) do |form| %>
+  <%# if player.errors.any? %>
+<!--    <div id="error_explanation">-->
+<!--      <h2><%#= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>-->
+
+<!--      <ul>-->
+        <%# player.errors.full_messages.each do |message| %>
+<!--          <li><%#= message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+  Enter the invitation code :
+
+  <div class="field">
+    <%= form.label :invitation_code %>
+    <%= form.text_field :invitation_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Quelle couleur voulait vous jouer ?' %>
+    <%= form.select :color, ['VERT', 'ROUGE', 'BLEU', 'JAUNE']%>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :user_id, value: params[:user] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
