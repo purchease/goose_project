@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     @game = Game::CreateAGame.run(user: current_user)
 
     if @game.success?
-      redirect_to @game
+      redirect_to @game.result
     else
       redirect_to root_path
     end

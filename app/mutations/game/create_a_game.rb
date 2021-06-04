@@ -6,11 +6,12 @@ class Game::CreateAGame < Mutations::Command
 
   def execute
     create_a_game
-    create_the_board
   end
 
   def create_a_game
     @game = Game.create(user_id: user.id)
+    create_the_board
+    @game
   end
 
   def create_the_board
