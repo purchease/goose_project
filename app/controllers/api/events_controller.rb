@@ -15,9 +15,9 @@ class Api::EventsController < ApplicationController
       end
 
       if user.present?
-        render json: { message: "http://goose-fidmarques.herokuapp.com/#{user.fidmarques_uuid}", status: 200}
+        render json: { message: "https://goose-fidmarques.herokuapp.com/#{user.fidmarques_uuid}"}, status: 200
       else
-        render json: { message: "User not found or created", status: 403 }
+        render json: { message: "User not found or created"}, status: 403
       end
 
     elsif params[:event] == "EARN"
