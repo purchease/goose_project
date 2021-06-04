@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   resources :games
   resources :players
+
+  namespace :api do
+    get 'events', to: 'events#receive_events'
+  end
 end
