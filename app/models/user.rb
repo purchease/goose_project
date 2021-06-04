@@ -13,6 +13,6 @@ class User < ApplicationRecord
   end
 
   def current_player
-    players.last
+    players.last if players.present?
   end
 end
