@@ -2,6 +2,7 @@ class Player::CreateFromInvitationCode < Mutations::Command
 
   required do
     string :invitation_code
+    model :user
     string :color
   end
 
@@ -19,7 +20,7 @@ class Player::CreateFromInvitationCode < Mutations::Command
   end
 
   def create_a_player
-    Player::Create.run!(game: @game, color: color)
+    Player::Create.run!(game: @game, user: user, color: color)
   end
 
 end

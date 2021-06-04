@@ -1,9 +1,10 @@
 class PlayersController < InheritedResources::Base
   # before_action :set_game, only: [:create]
+  before_action :authenticate_user!
 
   def create
 
-    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], color: player_params[:color])
+    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], color: player_params[:color], user: current_user)
 
 
       if player.success?

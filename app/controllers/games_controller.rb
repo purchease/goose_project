@@ -1,11 +1,19 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_game, only: [:show]
   def show
   end
 
   def create
-    byebug
-    Game::CreateAGame.run!(user_id: user.id)
+    @game = Game::CreateAGame.run(user: current_user)
+
+    if @game.success?
+      redirect_to @game
+    else
+      redirect_to root_path
+    end
+
   end
 
   def join

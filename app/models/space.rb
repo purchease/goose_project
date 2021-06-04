@@ -1,6 +1,6 @@
 class Space < ApplicationRecord
 
-  belongs_to :space_skills
+  belongs_to :space_skill
 
 
 end

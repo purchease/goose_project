@@ -6,16 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: "nans@yopmail.com", fidmarques_uuid: "072e69bc-c51a-11eb-8529-0242ac130003", name: "Nans", password:"random")
-User.create(email: "david@yopmail.com",fidmarques_uuid: "1d92c90a-c51a-11eb-8529-0242ac130003", name: "David", password:"random")
-User.create(email: "ambroise@yopmail.com",fidmarques_uuid: "219053ce-c51a-11eb-8529-0242ac130003", name: "Ambroise", password:"random")
+User.create(id: 1, email: "nans@yopmail.com", fidmarques_uuid: "072e69bc-c51a-11eb-8529-0242ac130003", name: "Nans", password:"random")
+User.create(id: 2, email: "david@yopmail.com",fidmarques_uuid: "1d92c90a-c51a-11eb-8529-0242ac130003", name: "David", password:"random")
+User.create(id: 3, email: "ambroise@yopmail.com",fidmarques_uuid: "219053ce-c51a-11eb-8529-0242ac130003", name: "Ambroise", password:"random")
 
 SpaceSkill.create(id: 1, name: "BLANK", rule: "This case is neutral.")
 SpaceSkill.create(id: 2, name: "TWO_TIMES", rule: "Multiple by 2 the total dice.")
 SpaceSkill.create(id: 3, name: "HOLE", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
-SpaceSkill.create(id: 4, name: "HOLE", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
+SpaceSkill.create(id: 4, name: "TEST", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
+SpaceSkill.create(id: 5, name: "TEST2", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
 
-Game.create(number_of_players: 3, invitation_code: "BOUBOU")
+Game.create(number_of_players: 3, invitation_code: "BOUBOU", user_id: 1)
 
 
 

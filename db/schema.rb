@@ -37,9 +37,11 @@ ActiveRecord::Schema.define(version: 2021_06_04_125443) do
 
   create_table "games", force: :cascade do |t|
     t.integer "number_of_players"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "invitation_code"
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "gift_attributions", force: :cascade do |t|
@@ -108,6 +110,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_125443) do
   add_foreign_key "game_credits", "games"
   add_foreign_key "game_credits", "players"
   add_foreign_key "game_invitations", "games"
+  add_foreign_key "games", "users"
   add_foreign_key "gift_attributions", "players"
   add_foreign_key "player_space_positions", "players"
   add_foreign_key "player_space_positions", "spaces"
