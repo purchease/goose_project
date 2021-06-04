@@ -17,7 +17,7 @@ class HomepageController < ApplicationController
     puts "received uuid : #{params[:uuid]}"
     uuid = params[:uuid].split('!').first
     puts "modified uuid : #{uuid}"
-    @user = User.where(fidmarques_uuid: params[:uuid]).first
+    @user = User.where(fidmarques_uuid: uuid).first
     sign_in @user, event: :authentication if !user_signed_in? || @user.present?
   end
 end
