@@ -13,7 +13,7 @@ class HomepageController < ApplicationController
   private
 
   def set_user
-    params[:uuid] = '072e69bc-c51a-11eb-8529-0242ac130003'
+    params[:uuid] = '072e69bc-c51a-11eb-8529-0242ac130003' if Rails.env.development?
 
     @user = User.where(fidmarques_uuid: params[:uuid]).first
     sign_in @user
