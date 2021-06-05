@@ -25,7 +25,7 @@ class Api::EventsController < ApplicationController
     elsif params[:event] == "EARN"
       # Retourner l'URL si success
       if params[:points_earned].positive? &&
-        create_credit = Game::CreateCredit.run(fidmarques_uuid: params[:user_id])
+        create_credit = Game::CreateCredit.run!(fidmarques_uuid: params[:user_id])
         if create_credit.success?
           render json: { message: "https://goose-fidmarques.herokuapp.com/?uuid=#{user.fidmarques_uuid}", status: 200}
         else
@@ -41,15 +41,8 @@ class Api::EventsController < ApplicationController
 
   def post_to_core(user_id)
     url = 'https://staging-api.purchease.com/api/integration/v1/plugins/push_message'
-    payload = {
-      token: "thisisanothersecret",
-      user_id:user_id,
-      payload: {
-        message: "Come ooooooooooon"
-      }
-    }
 
-    RestClient.post url, (payload do |response, _request, _result|
+    RestClient.post url, (payload(user_id) do |response, _request, _result|
       case response.code
       when 200
         response.return!
@@ -57,6 +50,16 @@ class Api::EventsController < ApplicationController
         puts 'tough luck'
       end
     end)
+  end
+
+  def payload(user_id)
+    {
+      token: "thisisanothersecret",
+      user_id:user_id,
+      payload: {
+        message: "Come ooooooooooon"
+      }
+    }
   end
 
 end
