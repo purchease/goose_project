@@ -9,11 +9,12 @@ class Game::CreateAGame < Mutations::Command
   end
 
   def validate
-    add_error(:user, :game, 'A game already exists') if player.nil? || Game.where(user: user).first.status != "FINISHED".present?
+    add_error(:user, :game, 'A game already exists') if !player.nil? && Game.where(user: player.user).last.status != "FINISHED".present?
   end
 
   def execute
-    create_a_game
+
+    create_a_game if
     @game
   end
 

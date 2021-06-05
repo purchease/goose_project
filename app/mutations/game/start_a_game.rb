@@ -52,7 +52,6 @@ class Game::StartAGame < Mutations::Command
   end
 
   def give_away_a_credit
-    byebug
     Game::CreateCreditActiveGame.run!(user: @users.first)
   end
 
