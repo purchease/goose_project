@@ -13,10 +13,10 @@ class GamesController < ApplicationController
 
   def create
     @game = Game::CreateAGame.run(user: current_user)
-    game_current_user = Game.where(user_id: current_user.id).last
-    
-    if game_current_user.present?
-      redirect_to game_current_user
+    byebug
+    # game_current_user = Game.where(user_id: current_user.id).last
+    if @game.present?
+      redirect_to @game
     else
       redirect_to root_path
     end

@@ -36,6 +36,8 @@ class Api::EventsController < ApplicationController
         else
           render json: { message: "Credit could not be credited", status: 403 }
         end
+
+        post_to_all(@user.current_game)
       else
 
       end
@@ -43,6 +45,49 @@ class Api::EventsController < ApplicationController
       # Rien à faire donc je te dis NOP
     end
   end
+
+  def post_to_all(game)
+    post_to_core(payload_from_yourself(game.user_id))
+
+    game.players.each do |player|
+      post_to_core(payload_from_your_friend(player.user.fidmarques_uuid))
+    end
+  end
+
+  def post_to_core(payload)
+    url = 'https://staging-api.purchease.com/api/integration/v1/plugins/push_message'
+
+    sleep 5
+    RestClient.post url, (payload do |response, _request, _result|
+      case response.code
+      when 200
+        response.return!
+      else
+        render json: { message: "Warning nous avons une 404"}, status: 404
+      end
+    end)
+  end
+
+  def payload_from_your_friend(user_id)
+    {
+      token: "thisisanothersecret",
+      user_id: user_id,
+      payload: {
+        message: "Hey ! Vous avez des potes cool quand même... On va a offert un crédit ;)."
+      }
+    }
+  end
+
+  def payload_from_yourself(user_id)
+    {
+      token: "thisisanothersecret",
+      user_id: user_id,
+      payload: {
+        message: "Ticket bien reçu ! Vous allez le droit à une nouvelle partie."
+      }
+    }
+  end
+
 
 
 end

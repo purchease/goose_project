@@ -4,8 +4,12 @@ class Game::CreateAGame < Mutations::Command
     model :user
   end
 
+  def player
+    @player ||= Player.where(user_id: user.id).last
+  end
+
   def validate
-    add_error(:user, :game, 'A game already exists') if Game.where(user_id: user.id).where.not(status: "FINISHED").present?
+    add_error(:user, :game, 'A game already exists') if player.nil? && player.games.last.status != "FINISHED".present?
     return
   end
 
