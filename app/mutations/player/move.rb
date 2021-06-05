@@ -53,6 +53,10 @@ class Player::Move < Mutations::Command
     new_space.position == 63
   end
 
+  def special_space
+    new_space.special_skill
+  end
+
   def result
     {
       dices: dices,

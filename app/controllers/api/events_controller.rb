@@ -26,9 +26,9 @@ class Api::EventsController < ApplicationController
       if params[:points_earned].positive?
         @user = User.where(fidmarques_uuid: params[:user_id]).first
         if @user.try(:players).try(:last).try(:game).try(:status) != "FINISHED" && @user.players.exists?
-          create_credit = Game::CreateCreditActiveGame.run!(user: @user)
+          create_credit = Game::CreateCreditActiveGame.run(user: @user)
         else
-          create_credit = Game::CreateCreditInactiveGame.run!(user: @user)
+          create_credit = Game::CreateCreditInactiveGame.run(user: @user)
         end
 
         if create_credit.success?
