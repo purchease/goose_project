@@ -13,8 +13,7 @@ class Game::CreateAGame < Mutations::Command
   end
 
   def execute
-
-    create_a_game if
+    create_a_game
     @game
   end
 

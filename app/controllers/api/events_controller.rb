@@ -47,18 +47,30 @@ class Api::EventsController < ApplicationController
   end
 
   def post_to_all(game)
-    post_to_core(payload_from_yourself(game.user_id))
+    post_from_user_to_core(game.user_id)
 
     game.players.each do |player|
       post_to_core(payload_from_your_friend(player.user.fidmarques_uuid))
     end
   end
 
-  def post_to_core(payload)
+  def post_to_core(user_id)
     url = 'https://staging-api.purchease.com/api/integration/v1/plugins/push_message'
 
-    sleep 5
-    RestClient.post url, (payload do |response, _request, _result|
+    RestClient.post url, (payload_from_your_friend(user_id) do |response, _request, _result|
+      case response.code
+      when 200
+        response.return!
+      else
+        render json: { message: "Warning nous avons une 404"}, status: 404
+      end
+    end)
+  end
+
+  def post_from_user_to_core(user_id)
+    url = 'https://staging-api.purchease.com/api/integration/v1/plugins/push_message'
+
+    RestClient.post url, (payload_from_yourself(user_id) do |response, _request, _result|
       case response.code
       when 200
         response.return!
