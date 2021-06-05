@@ -15,7 +15,6 @@ class Player::Move < Mutations::Command
   end
 
   def execute
-    byebug
     move_the_player
     result
   end

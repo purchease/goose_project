@@ -9,7 +9,6 @@ class DicesController < ApplicationController
 
     if dice_roll.success?
       dices = dice_roll.result
-      byebug
       Player::Move.run(dices: dices, game: @game, player: @player)
       if Player::Move.success?
         @game_credit.update(is_used: true)
