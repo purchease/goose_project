@@ -1,4 +1,4 @@
-class Space::Rule < Mutations::Command
+class Space::SpecialSpace < Mutations::Command
 
   required do
     integer :total
