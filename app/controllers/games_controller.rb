@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game::CreateAGame.run(user: current_user)
+    @game = Game::CreateAGame.run!(user: current_user)
     byebug
     # game_current_user = Game.where(user_id: current_user.id).last
     if @game.present?
