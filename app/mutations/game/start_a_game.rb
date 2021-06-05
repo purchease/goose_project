@@ -9,6 +9,7 @@ class Game::StartAGame < Mutations::Command
     create_the_board
     update_the_status
     initialize_positions
+    give_away_a_credit
     game
   end
 
@@ -48,6 +49,10 @@ class Game::StartAGame < Mutations::Command
     players.each do |player|
       PlayerSpacePosition.create!(game: game, space: space_initialize, player: player)
     end
+  end
+
+  def give_away_a_credit
+    Game::CreateCreditActiveGame.run!(user: @users.first)
   end
 
 end
