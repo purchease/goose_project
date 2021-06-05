@@ -9,10 +9,15 @@ class DicesController < ApplicationController
 
     if dice_roll.success?
       dices = dice_roll.result
-      Player::Move.run(dices: dices, game: @game, player: @player)
-      if Player::Move.success?
+      player_move = Player::Move.run(dices: dices, game: @game, player: @player)
+
+      if player_move.success?
         @game_credit.update(is_used: true)
+        player_move_result = player_move.result
       end
+
+      flash.now[:alert] = "Vous avez obtenu #{player_move_result[:dices]["dice_1"]} & #{player_move_result[:dices]["dice_2"]} vous avancez de la case #{player_move_result[:previous_space].position} à #{player_move_result[:new_space].position}"
+      redirect_to @game
     end
   end
 

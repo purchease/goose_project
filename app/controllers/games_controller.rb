@@ -27,9 +27,9 @@ class GamesController < ApplicationController
   end
 
   def start_a_game
-    Game::StartAGame.run(game: @game)
+    Game::StartAGame.run!(game: @game)
+    redirect_to @game
   end
-
 
   private
 

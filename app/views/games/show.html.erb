@@ -35,6 +35,7 @@ Voici le code d'invitation : <%= @game.invitation_code %> <br />
 <% end %>
 
 <% if @game.status == Game::RUNNING && @credits.present? %>
+  Vous avez <%= @credits.count %> crédit(s), Good luck !
   <%= link_to "Roll the dices BRO !", rolls_path(credit: @credits.first, game: @game, player: @player ), method: :post %>
 <% end  %>
 

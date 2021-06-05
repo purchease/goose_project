@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
+gem 'toastr-rails', '~> 1.0'
+gem 'bootstrap-modal-rails'
 
 gem 'rest-client'
 gem 'devise'

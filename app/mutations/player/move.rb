@@ -6,12 +6,16 @@ class Player::Move < Mutations::Command
       integer :dice_2
     end
 
-    model :game_id
-    model :player_id
+    model :game
+    model :player
   end
 
   def validate
-    @player_space_position = PlayerSpacePosition.where(player_id:player_id, game_id: game_id).last
+    @player_space_position = PlayerSpacePosition.where(player:player, game: game).last
+  end
+
+  def previous_space
+    @previous_space ||= @player_space_position.space
   end
 
   def execute
@@ -30,21 +34,23 @@ class Player::Move < Mutations::Command
   end
 
   def update_the_new_space
-    @psp = PlayerSpacePosition.where(player_id:player_id, game_id: game_id).last
-    @psp.update(position: new_position)
+    @psp = PlayerSpacePosition.where(player:player, game: game).last
+    @psp.update(space: new_space)
   end
 
-  def new_position
-    @new_position ||= @player_space_position.position + @sum_the_dices
+  def new_space
+    return @new_space if defined?(@new_space)
+
+    new_position = previous_space.position + @sum_the_dices
+    @new_position = game.spaces.where(position: new_position).first
   end
 
   def result
     {
       dices: dices,
-      new_position: @psp.space.position
+      new_space: new_space,
+      previous_space: previous_space
     }
-    # La nouvelle position
-    # Le nombre de dès
   end
 
 end

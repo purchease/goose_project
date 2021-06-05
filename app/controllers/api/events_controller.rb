@@ -24,8 +24,14 @@ class Api::EventsController < ApplicationController
 
     elsif params[:event] == "EARN"
       # Retourner l'URL si success
-      if params[:points_earned].positive? &&
-        create_credit = Game::CreateCredit.run!(fidmarques_uuid: params[:user_id])
+      if params[:points_earned].positive?
+        @user = User.where(fidmarques_uuid: fidmarques_uuid).first
+        if @user.try(:players).try(:last).try(:game).try(:status) != "FINISHED" && @user.players.exists?
+          create_credit = Game::CreateCreditActiveGame.run!(user: @user)
+        else
+          create_credit = Game::CreateCreditInactiveGame.run!(user: @user)
+        end
+
         if create_credit.success?
           render json: { message: "https://goose-fidmarques.herokuapp.com/?uuid=#{user.fidmarques_uuid}", status: 200}
         else
@@ -55,7 +61,7 @@ class Api::EventsController < ApplicationController
   def payload(user_id)
     {
       token: "thisisanothersecret",
-      user_id:user_id,
+      user_id: user_id,
       payload: {
         message: "Come ooooooooooon"
       }

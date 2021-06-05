@@ -1,11 +1,7 @@
 class Game::CreateCreditInactiveGame < Mutations::Command
 
   required do
-    string :fidmarques_uuid
-  end
-
-  def validate
-    @user = User.where(fidmarques_uuid: fidmarques_uuid).first
+    model :user
   end
 
   def execute
@@ -13,7 +9,7 @@ class Game::CreateCreditInactiveGame < Mutations::Command
   end
 
   def create_credit_to_user
-    GameCredit.create!(personable: @user, is_used: 0)
+    GameCredit.create!(personable: user, is_used: 0)
   end
 
 end

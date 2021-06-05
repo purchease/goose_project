@@ -3,6 +3,7 @@ class PlayersController < InheritedResources::Base
   before_action :authenticate_user!
 
   def new
+    @player = Player.new
   end
 
   def create
