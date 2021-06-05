@@ -14,13 +14,12 @@ class Game::CreateAGame < Mutations::Command
   end
 
   def create_a_game
-    @game = Game.create(user_id: user.id, invitation_code: SecureRandom.random_number(10000000))
-    create_the_board
+    @game = Game.create(user_id: user.id, invitation_code: SecureRandom.random_number(10000000), status: Game::WAITING)
     @game
   end
 
-  def create_the_board
-    Board::Create.run!(game: @game)
-  end
+  # def create_the_board
+  #   Board::Create.run!(game: @game)
+  # end
 
 end

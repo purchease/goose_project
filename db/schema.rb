@@ -10,19 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_172400) do
+ActiveRecord::Schema.define(version: 2021_06_04_220903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "game_credits", force: :cascade do |t|
-    t.bigint "game_id", null: false
-    t.bigint "player_id", null: false
+    t.bigint "game_id"
+    t.string "personable_type"
+    t.bigint "personable_id"
     t.boolean "is_used"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_game_credits_on_game_id"
-    t.index ["player_id"], name: "index_game_credits_on_player_id"
+    t.index ["personable_type", "personable_id"], name: "index_game_credits_on_personable_type_and_personable_id"
   end
 
   create_table "game_invitations", force: :cascade do |t|
@@ -63,6 +64,8 @@ ActiveRecord::Schema.define(version: 2021_06_04_172400) do
     t.bigint "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "game_id", null: false
+    t.index ["game_id"], name: "index_player_space_positions_on_game_id"
     t.index ["player_id"], name: "index_player_space_positions_on_player_id"
     t.index ["space_id"], name: "index_player_space_positions_on_space_id"
   end
@@ -109,10 +112,10 @@ ActiveRecord::Schema.define(version: 2021_06_04_172400) do
   end
 
   add_foreign_key "game_credits", "games"
-  add_foreign_key "game_credits", "players"
   add_foreign_key "game_invitations", "games"
   add_foreign_key "games", "users"
   add_foreign_key "gift_attributions", "players"
+  add_foreign_key "player_space_positions", "games"
   add_foreign_key "player_space_positions", "players"
   add_foreign_key "player_space_positions", "spaces"
   add_foreign_key "players", "games"

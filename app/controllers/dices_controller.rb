@@ -5,9 +5,11 @@ class DicesController < ApplicationController
 
   def rolls
     # Call pour avoir les dès
-    Dice::Roll.run
-    if Dice::Roll.success?
-      dices = Dice::Roll.result
+    dice_roll = Dice::Roll.run
+
+    if dice_roll.success?
+      dices = dice_roll.result
+      byebug
       Player::Move.run(dices: dices, game: @game, player: @player)
       if Player::Move.success?
         @game_credit.update(is_used: true)
@@ -18,14 +20,14 @@ class DicesController < ApplicationController
   private
 
   def set_credit
-    @game_credit = GameCredit.find(params[:id])
+    @game_credit = GameCredit.find(params[:credit])
   end
 
   def set_game
-    @game = Game.find(params[:id])
+    @game = Game.find(params[:game])
   end
 
   def set_player
-    @player = Player.find(params[:id])
+    @player = Player.find(params[:player])
   end
 end

@@ -4,9 +4,11 @@ class Game < ApplicationRecord
   RUNNING = 'RUNNING'
   FINISHED = 'FINISHED'
 
-  has_many :players
-  has_many :spaces
-  has_many :game_credits
+  has_many :players, dependent: :destroy
+  has_many :spaces, dependent: :destroy
+  has_many :game_credits, dependent: :destroy
+
+  has_many :player_space_positions, dependent: :destroy
 
 
   def color_available

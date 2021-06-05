@@ -11,9 +11,10 @@ Voici le code d'invitation : <%= @game.invitation_code %> <br />
 <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
 <% end %>
 <% if @players.present? %>
-  Vos adversaires sont : <br />
+  <br />
+  Les participants sont : <br />
   <% @players.each do |player| %>
-    - <%= player.user.name %> <br />
+    - <%= player.user.name || player.user.email %> <br />
   <% end %>
 <% end %>
 
@@ -33,8 +34,12 @@ Voici le code d'invitation : <%= @game.invitation_code %> <br />
 
 <% end %>
 
-<% if @credits.present? %>
+<% if @game.status == Game::RUNNING && @credits.present? %>
   <%= link_to "Roll the dices BRO !", rolls_path(credit: @credits.first, game: @game, player: @player ), method: :post %>
+<% end  %>
+
+<% if @player.id.present? && @game.status == Game::WAITING %>
+  <%= link_to "Start the game !", start_a_game_path( id: @game ), method: :post %>
 <% end  %>
 
 

@@ -17,8 +17,6 @@ SpaceSkill.create(id: 3, name: "HOLE", rule: "YOU DROP AND MOVE BACKWARD TO 4 CA
 SpaceSkill.create(id: 4, name: "TEST", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
 SpaceSkill.create(id: 5, name: "TEST2", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
 
-Game.create(number_of_players: 3, invitation_code: "BOUBOU", user_id: 1)
-
 
 
 

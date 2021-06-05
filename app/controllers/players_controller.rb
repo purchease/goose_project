@@ -7,10 +7,10 @@ class PlayersController < InheritedResources::Base
 
   def create
 
-    player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], user: current_user, color: player_params[:color])
+    @player = Player::CreateFromInvitationCode.run(invitation_code: player_params[:invitation_code], user: current_user, color: player_params[:color])
     @game = Game.where(invitation_code: player_params[:invitation_code]).first
 
-      if player.success?
+      if @player.success?
         redirect_to @game
       else
 

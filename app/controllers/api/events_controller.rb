@@ -22,7 +22,7 @@ class Api::EventsController < ApplicationController
 
     elsif params[:event] == "EARN"
       # Retourner l'URL si success
-      if params[:points_earned].positive?
+      if params[:points_earned].positive? &&
         create_credit = Game::CreateCredit.run(fidmarques_uuid: params[:user_id])
         if create_credit.success?
           render json: { message: "https://goose-fidmarques.herokuapp.com/?uuid=#{user.fidmarques_uuid}", status: 200}

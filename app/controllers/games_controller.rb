@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :set_game, only: [:show]
+  before_action :set_game, only: [:show, :start_a_game]
   def show
     @player = Player.where(user: current_user, game: @game).first_or_initialize
     @board = @game.spaces.order(position: :asc)
     @players = @game.players
-    @credits = GameCredit.where(game:@game, player_id: current_user.current_player, is_used: false) if @players.present?
+    @credits = GameCredit.where(game:@game, personable: current_user.current_player_or_user, is_used: false) if @players.present?
   end
 
   def create
@@ -23,6 +23,10 @@ class GamesController < ApplicationController
 
   def join
     @user = User.find(params)
+  end
+
+  def start_a_game
+    Game::StartAGame.run(game: @game)
   end
 
 

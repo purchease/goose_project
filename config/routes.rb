@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   end
 
   post 'rolls', to: 'dices#rolls'
+  post 'start_a_game', to: 'games#start_a_game'
+
 end
