@@ -3,13 +3,17 @@
         height: 300px; /* Or whatever */
     }
 </style>
-
-Tu veux inviter du monde à rejoindre la partie ? <br />
-
-Voici le code d'invitation : <%= @game.invitation_code %> <br />
-<% if user_signed_in? %>
-<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+<% if @players.count == 0 %>
+Tu attends quoi pour rentrer dans l'octogone ?!!! Let's gooooo clique moi ça <br />
+  <% elsif @players.count == 1 %>
+  Hey mais tu fais quoi là !! tu n'as pas de potes de l'apero ? Invite les desuite à rejoindre la partie !!!!!!! <br />
+  <% elsif @players.count >= 2 %>
+  Ok c'est bon je me calme... tu as des potes enfait et j'ai peur maintenant...
 <% end %>
+Voici le code d'invitation : <b><%= @game.invitation_code %></b> <br />
+<%# if user_signed_in? %>
+<%#= link_to "Sign out", destroy_user_session_path, method: :delete %>
+<%# end %>
 <% if @players.present? %>
   <br />
   Les participants sont : <br />
@@ -38,14 +42,21 @@ Voici le code d'invitation : <%= @game.invitation_code %> <br />
   La partie est terminée, le vainqueur est <%= @positions.map{|position| position.player.user.name || position.player.user.email if position.space.position == 63}.compact.join('') %> <br />
   <%= link_to "Cliquez ici pour revenir au menu principal !", end_game_path(id: @game ), method: :post %>
 <% end  %>
-
+<br />
 <% if @game.status == Game::RUNNING && @credits.try(:amount).try(:positive?) && !@finished %>
   Vous avez <%= @credits.amount %> crédit(s), Good luck !
   <%= link_to "Roll the dices BRO !", rolls_path(credit: @credits, game: @game, player: @player ), method: :post %>
+  <% else %>
+  Vous n'avez pas de crédit !! Il faut conso là !!
 <% end  %>
-
-<% if @player.id.present? && @game.status == Game::WAITING %>
+<br />
+<br />
+<% if @player.id.present? && @game.status == Game::WAITING && @game.players.count >= 2 %>
   <%= link_to "Start the game !", start_a_game_path( id: @game ), method: :post %>
+<% elsif @game.status == Game::RUNNING %>
+
+  <% else %>
+  Il faut 2 joueurs minimum pour démarrer la partie
 <% end  %>
 
 

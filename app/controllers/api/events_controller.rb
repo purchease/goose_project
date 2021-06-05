@@ -24,7 +24,7 @@ class Api::EventsController < ApplicationController
     elsif params[:event] == "EARN"
       # Retourner l'URL si success
       if params[:points_earned].positive?
-        @user = User.where(fidmarques_uuid: fidmarques_uuid).first
+        @user = User.where(fidmarques_uuid: params[:user_id]).first
         if @user.try(:players).try(:last).try(:game).try(:status) != "FINISHED" && @user.players.exists?
           create_credit = Game::CreateCreditActiveGame.run!(user: @user)
         else
