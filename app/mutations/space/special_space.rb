@@ -9,13 +9,13 @@ class Space::SpecialSpace < Mutations::Command
     @total = total
 
     case space.space_skill.rule
-    when Space::TWO_TIMES
+    when SpaceSkill::TWO_TIMES
       @total = (total*2)
-    when Space::MOVE_BACK_3_CASES
+    when SpaceSkill::MOVE_BACK_3_CASES
       @total -= 3
-    when Space::GO_BACK_STARTING
+    when SpaceSkill::GO_BACK_STARTING
       hole
-    when Space::BUMP_5_CASES
+    when SpaceSkill::BUMP_5_CASES
       5
     else
       @total

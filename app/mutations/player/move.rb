@@ -43,10 +43,12 @@ class Player::Move < Mutations::Command
 
     new_position = previous_space.position + @sum_the_dices
     current_position = game.spaces.where(position: new_position).first
-    after_special_space = Space::SpecialSpace.run(total: new_position, space: current_position).result
+    after_special_space = Space::SpecialSpace.run!(total: new_position, space: current_position)
 
     if after_special_space >= 63
       @new_space = game.spaces.where(position: 63).first
+    elsif after_special_space <= 0
+      @new_space = game.spaces.where(position: 0).first
     else
       @new_space = game.spaces.where(position: after_special_space).first
     end
