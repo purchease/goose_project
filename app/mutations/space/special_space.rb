@@ -14,9 +14,9 @@ class Space::SpecialSpace < Mutations::Command
     when SpaceSkill::MOVE_BACK_3_CASES
       @total -= 3
     when SpaceSkill::GO_BACK_STARTING
-      hole
+      @total = 0
     when SpaceSkill::BUMP_5_CASES
-      5
+      @total += 5
     else
       @total
     end

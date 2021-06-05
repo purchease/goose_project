@@ -11,11 +11,11 @@ if Rails.env.development?
   User.create(id: 3, email: "ambroise@yopmail.com",fidmarques_uuid: "219053ce-c51a-11eb-8529-0242ac130003", name: "Ambroise", password:"random")
 end
 
-SpaceSkill.create(id: 1, name: "BLANK", rule: "This case is neutral.")
+SpaceSkill.create(id: 1, name: "NEUTRAL", rule: "This case is neutral.")
 SpaceSkill.create(id: 2, name: "TWO_TIMES", rule: "Multiple by 2 the total dice.")
-SpaceSkill.create(id: 3, name: "HOLE", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
-SpaceSkill.create(id: 4, name: "TEST", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
-SpaceSkill.create(id: 5, name: "TEST2", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
+SpaceSkill.create(id: 3, name: "MOVE_BACK_3_CASES", rule: "Move Back 3 cases")
+SpaceSkill.create(id: 4, name: "GO_BACK_STARTING", rule: "BACK TO 0.")
+SpaceSkill.create(id: 5, name: "BUMP_5_CASES", rule: "YOU DROP AND MOVE BACKWARD TO 4 CASES.")
 
 
 
