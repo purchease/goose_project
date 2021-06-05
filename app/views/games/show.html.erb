@@ -35,11 +35,11 @@ Voici le code d'invitation : <%= @game.invitation_code %> <br />
 <% end %>
 
 <% if @finished %>
-  La partie est terminée, le vainqueur est <% @positions.map{|position| position.player.user.email if position.space.position == 63}.compact.join('') %>
-  <%= link_to "Roll the dices BRO !", rolls_path(credit: @credits, game: @game, player: @player ), method: :post %>
+  La partie est terminée, le vainqueur est <%= @positions.map{|position| position.player.user.name || position.player.user.email if position.space.position == 63}.compact.join('') %> <br />
+  <%= link_to "Cliquez ici pour revenir au menu principal !", end_game_path(id: @game ), method: :post %>
 <% end  %>
 
-<% if @game.status == Game::RUNNING && @credits.try(:amount).try(:positive?) %>
+<% if @game.status == Game::RUNNING && @credits.try(:amount).try(:positive?) && !@finished %>
   Vous avez <%= @credits.amount %> crédit(s), Good luck !
   <%= link_to "Roll the dices BRO !", rolls_path(credit: @credits, game: @game, player: @player ), method: :post %>
 <% end  %>

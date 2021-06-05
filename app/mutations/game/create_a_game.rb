@@ -5,7 +5,7 @@ class Game::CreateAGame < Mutations::Command
   end
 
   def validate
-    add_error(:user, :game, 'A game already exists') if Game.where(user_id: user.id).present?
+    add_error(:user, :game, 'A game already exists') if Game.where(user_id: user.id).where.not(status: "FINISHED").present?
     return
   end
 

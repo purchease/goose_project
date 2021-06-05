@@ -14,7 +14,7 @@ class GamesController < ApplicationController
   def create
     @game = Game::CreateAGame.run(user: current_user)
     game_current_user = Game.where(user_id: current_user.id).last
-
+    byebug
     if game_current_user.present?
       redirect_to game_current_user
     else
@@ -34,7 +34,7 @@ class GamesController < ApplicationController
 
   def end_game
     @game.update(status: Game::FINISHED)
-    redirect_to root_path
+    redirect_to root_path(uuid: current_user.fidmarques_uuid)
   end
 
   private
