@@ -22,11 +22,11 @@ class Game::CreateCreditActiveGame < Mutations::Command
   end
 
   def create_credit_to_all_users
-    credit = []
     @players.each do |player|
-      credit << GameCredit.where(game_id: @game.id, personable: player, is_used: 0).first_or_create
-    end
-    return true if credit.count == @players.count
+        game_credit = GameCredit.where(game_id: @game.id, personable: player).first_or_create
+        game_credit.amount += 1
+        game_credit.save!
+      end
   end
 
 end

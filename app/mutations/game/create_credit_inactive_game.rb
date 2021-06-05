@@ -9,7 +9,10 @@ class Game::CreateCreditInactiveGame < Mutations::Command
   end
 
   def create_credit_to_user
-    GameCredit.create!(personable: user, is_used: 0)
+    game_credit = GameCredit.where(personable: user, is_used: nil, game_id: nil).first_or_create
+    game_credit.amount += 1
+    game_credit.save!
+
   end
 
 end

@@ -28,10 +28,11 @@ class Game::UpdateCreditWhenStartingAGame < Mutations::Command
     credits.each do |credit|
       credit.update(personable: credit.user.current_player, game_id: game.id)
       @players.each do |player|
-        credit << GameCredit.where(game_id: game.id, personable: player, is_used: 0).first_or_create
+        game_credit = GameCredit.where(game_id: game.id, personable: player, is_used: 0).first_or_create
+        game_credit.amount += 1
+        game_credit.save!
       end
     end
-    credit
   end
 
 end

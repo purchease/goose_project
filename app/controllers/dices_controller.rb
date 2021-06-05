@@ -12,7 +12,8 @@ class DicesController < ApplicationController
       player_move = Player::Move.run(dices: dices, game: @game, player: @player)
 
       if player_move.success?
-        @game_credit.update(is_used: true)
+        @game_credit.amount -= 1
+        @game_credit.save!
         player_move_result = player_move.result
       end
 

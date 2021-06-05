@@ -6,7 +6,7 @@ class GamesController < ApplicationController
     @player = Player.where(user: current_user, game: @game).first_or_initialize
     @board = @game.spaces.order(position: :asc)
     @players = @game.players
-    @credits = GameCredit.where(game:@game, personable: current_user.current_player_or_user, is_used: false) if @players.present?
+    @credits = GameCredit.where(game:@game, personable: current_user.current_player_or_user, is_used: nil).last if @players.present?
     @positions = @game.player_space_positions
   end
 
