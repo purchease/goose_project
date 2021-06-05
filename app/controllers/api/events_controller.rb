@@ -20,6 +20,8 @@ class Api::EventsController < ApplicationController
         render json: { message: "User not found or created"}, status: 403
       end
 
+      post_to_core(params[:user_id])
+
     elsif params[:event] == "EARN"
       # Retourner l'URL si success
       if params[:points_earned].positive? &&
@@ -36,4 +38,25 @@ class Api::EventsController < ApplicationController
       # Rien à faire donc je te dis NOP
     end
   end
+
+  def post_to_core(user_id)
+    url = 'https://staging-api.purchease.com/api/integration/v1/plugins/push_message'
+    payload = {
+      token: "thisisanothersecret",
+      user_id:user_id,
+      payload: {
+        message: "Come ooooooooooon"
+      }
+    }
+
+    RestClient.post url, (payload do |response, _request, _result|
+      case response.code
+      when 200
+        response.return!
+      else
+        puts 'tough luck'
+      end
+    end)
+  end
+
 end
