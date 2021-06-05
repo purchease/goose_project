@@ -23,6 +23,13 @@
   <div class="number_position">
     <%= space.position %>
   </div>
+  <% unless @positions.empty? %>
+    <% @positions.each do |position| %>
+    <div class="number_position">
+      <%= position.space.position %>
+    </div>
+    <% end %>
+  <% end  %>
   <div class="logo_for_special_cases">
     <i class="<%= display_icon(space.space_skill_id) %>"></i>
   </div>

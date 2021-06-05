@@ -17,13 +17,19 @@ class Game::StartAGame < Mutations::Command
   end
 
   def users
-    game.players.map(&:user)
+    @users ||= players.map(&:user)
+  end
+
+  def players
+    @players ||= game.players
   end
 
   def credits?
+    credits = []
     users.map do |user|
-      user.game_credits.where(is_used: 0, game_id: nil)
+      credits << user.game_credits.where(is_used: 0, game_id: nil)
     end
+    credits.empty?
   end
 
   def create_the_board
@@ -34,9 +40,13 @@ class Game::StartAGame < Mutations::Command
     game.update(status: Game::RUNNING)
   end
 
+  def space_initialize
+    @space_initialize ||= game.spaces.where(position: 0).first
+  end
+
   def initialize_positions
-    game.players.each do |player|
-      PlayerSpacePosition.create!(game: game, space_id: 0, player: player)
+    players.each do |player|
+      PlayerSpacePosition.create!(game: game, space: space_initialize, player: player)
     end
   end
 

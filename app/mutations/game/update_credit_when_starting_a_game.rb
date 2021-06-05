@@ -9,7 +9,7 @@ class Game::UpdateCreditWhenStartingAGame < Mutations::Command
   end
 
   def users
-    @players.map(&:user)
+    players.map(&:user)
   end
 
   def credits

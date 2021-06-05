@@ -7,6 +7,7 @@ class GamesController < ApplicationController
     @board = @game.spaces.order(position: :asc)
     @players = @game.players
     @credits = GameCredit.where(game:@game, personable: current_user.current_player_or_user, is_used: false) if @players.present?
+    @positions = @game.player_space_positions
   end
 
   def create
