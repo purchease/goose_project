@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'rest-client'
 gem 'devise'
 gem 'activeadmin'
 gem 'mutations'
