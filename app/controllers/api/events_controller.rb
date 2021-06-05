@@ -47,7 +47,7 @@ class Api::EventsController < ApplicationController
 
   def post_to_core(user_id)
     url = 'https://staging-api.purchease.com/api/integration/v1/plugins/push_message'
-
+    sleep 5
     RestClient.post url, (payload(user_id) do |response, _request, _result|
       case response.code
       when 200
