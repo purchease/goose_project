@@ -37,7 +37,7 @@ class Api::EventsController < ApplicationController
           render json: { message: "Credit could not be credited", status: 403 }
         end
 
-        # post_to_all(@user.current_game)
+        post_to_all(@user.current_game)
       else
 
       end
