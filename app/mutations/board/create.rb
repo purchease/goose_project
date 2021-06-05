@@ -23,12 +23,12 @@ class Board::Create < Mutations::Command
     end
 
     # Hole cases
-    [42, 52, 58].each do |case_id|
+    [42, 52, 58, 6, 19, 31].each do |case_id|
       Space.create!(position: case_id, space_skill_id: 3, game_id: game.id)
     end
 
     # Other cases
-    [6, 19, 31].each do |case_id|
+    [63].each do |case_id|
       Space.create!(position: case_id, space_skill_id: 5, game_id: game.id)
     end
   end

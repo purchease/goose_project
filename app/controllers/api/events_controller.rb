@@ -10,9 +10,10 @@ class Api::EventsController < ApplicationController
         fidmarques_uuid: params[:user_id],
         email: params[:user][:email],
         name: params[:user][:first_name]
-      ).first_or_create do |user|
-        user.password = SecureRandom.hex(10)
-      end
+      ).first_or_create
+
+      user.password = SecureRandom.hex(10)
+      user.save!
 
       if user.present?
         render json: { message: "https://goose-fidmarques.herokuapp.com/?uuid=#{user.fidmarques_uuid}"}, status: 200

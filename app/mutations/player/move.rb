@@ -20,7 +20,6 @@ class Player::Move < Mutations::Command
 
   def execute
     move_the_player
-    did_you_finished?
     result
   end
 
@@ -43,12 +42,15 @@ class Player::Move < Mutations::Command
     return @new_space if defined?(@new_space)
 
     new_position = previous_space.position + @sum_the_dices
-    @new_position = game.spaces.where(position: 63).first if new_space.position >= 63
-    @new_position = game.spaces.where(position: new_position).first
+    if new_position >= 63
+      @new_space = game.spaces.where(position: 63).first
+    else
+      @new_space = game.spaces.where(position: new_position).first
+    end
   end
 
   def is_finished?
-    @new_position.position == 63
+    new_space.position == 63
   end
 
   def result
