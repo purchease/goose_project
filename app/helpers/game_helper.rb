@@ -3,15 +3,17 @@ module GameHelper
   def display_icon(space_skill_id)
 
     if space_skill_id == 1
-      'fab fa-affiliatetheme'
+      'square'
     elsif space_skill_id == 2
-      'fab fa-accusoft'
+      'square_two_times'
     elsif space_skill_id == 3
-      'fas fa-adjust'
+      'square_move_back_3_cases'
     elsif space_skill_id == 4
-      'fas fa-align-center'
+      'square_hole'
+    elsif space_skill_id == 5
+      'square_bump'
     else
-      ''
+      'square'
     end
   end
 end
