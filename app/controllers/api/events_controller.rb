@@ -32,7 +32,7 @@ class Api::EventsController < ApplicationController
         end
 
         if create_credit.success?
-          render json: { message: "https://goose-fidmarques.herokuapp.com/?uuid=#{user.fidmarques_uuid}"}, status: 200
+          render json: { message: "https://goose-fidmarques.herokuapp.com/?uuid=#{@user.fidmarques_uuid}"}, status: 200
         else
           render json: { message: "Credit could not be credited", status: 403 }
         end
